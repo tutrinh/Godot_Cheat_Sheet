@@ -21,6 +21,15 @@ var res . = load("res://robi.png")
 get_node("sprite").texture = res
 ```
 
+### Changing Scene
+```python
+get_tree().change_scene("res://levels/level2.tscn")
+-
+var next_scene = preload("res://levels/level2.tscn")
+get_tree().change_scene_to(next_scene)
+
+```
+
 ### Preload resources
 Will read file from the disk and load it at compile time.
 ```python
@@ -113,6 +122,7 @@ If you don't want the enemies to collide with each other then in the MASK proper
 This will let the inspector (GUI) to change the values of the variables 
 ```python
 export (int) var min_speed
+export (Array, String) var strings
 ```
 ### PackedScene
 Choosing the Class/Scene you want to instance from the GUI. Drag Mob.tscn from the left, file system, and drop it in the right under the Script Variables in the inspector.
