@@ -10,3 +10,32 @@ Const - ALL_CAPS
 ```javascript
 Object/Class is a .tscsn
 ```
+### Get Node
+```javascript
+get_node("NameOfNode") same as $NameOfNode
+```
+### Clamp
+```javascript
+clamp() = restrict values in given range
+```
+
+## SCRIPTS
+### Update Function
+```javascript
+func _process(delta):
+  if condition:
+    do something
+  else:
+    do something else
+    
+```
+
+### Ready
+When the node enters the scene tree
+```javascript
+func _ready():
+  screensize = get_viewport_rect().size
+```
+
+
+
