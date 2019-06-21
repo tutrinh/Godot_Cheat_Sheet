@@ -163,7 +163,94 @@ Singleton pattern is useful tool for solving the persistent info between scenes.
 ### Autoload a script to act like a singleton
 To autoload a script:
 Project > Project Settings > Autoload Tab > Select the tscn/gd script
+- Add the gd script
+- Give it a name
+- Check the enabled
 
+```
+Assuming you name it PlayerVariables is the name in the AutoLoad slot
+PlayerVariables.health -= 10
+
+Another way if the enabled is not checked
+var player_vars = get_node("/root/PlayerVariables")
+player_vars.health -= 10
+
+```
+
+### Creating a custom scene switcher using Autoload
+- Create a Global.gd
+- Add it to Autoload, Project > Project Settings > AutoLoad Tab
+- Autoloaded nodes are always first
+- This means that the last child of root is always the loaded scene.
+- 
+
+```
+extends Node
+
+var current_scene = null
+
+func _ready():
+    var root = get_tree().get_root()
+    current_scene = root.get_child(root.get_child_count() - 1)
+# Now we need a function for changing the scene. This function needs to free the current scene and replace it with the requested one.
+
+func goto_scene(path):
+    # This function will usually be called from a signal callback,
+    # or some other function in the current scene.
+    # Deleting the current scene at this point is
+    # a bad idea, because it may still be executing code.
+    # This will result in a crash or unexpected behavior.
+
+    # The solution is to defer the load to a later time, when
+    # we can be sure that no code from the current scene is running:
+
+    call_deferred("_deferred_goto_scene", path)
+
+
+func _deferred_goto_scene(path):
+    # It is now safe to remove the current scene
+    current_scene.free()
+
+    # Load the new scene.
+    var s = ResourceLoader.load(path)
+
+    # Instance the new scene.
+    current_scene = s.instance()
+
+    # Add it to the active scene, as child of root.
+    get_tree().get_root().add_child(current_scene)
+
+    # Optionally, to make it compatible with the SceneTree.change_scene() API.
+    get_tree().set_current_scene(current_scene)
+
+
+```
+
+Using Object.call_deferred(), the second function will only run once all code from the current scene has completed. Thus, the current scene will not be removed while it is still being used (i.e. its code is still running).
+
+Finally, we need to fill the empty callback functions in the two scenes:
+
+```
+# Add to 'Scene1.gd'.
+
+func _on_Button_pressed():
+    Global.goto_scene("res://Scene2.tscn")
+```
+
+```
+# Add to 'Scene2.gd'.
+
+func _on_Button_pressed():
+    Global.goto_scene("res://Scene1.tscn")
+```
+
+## Background loading
+### ResourceInteractiveLoader
+
+The ResourceInteractiveLoader class allows you to load a resource in stages. Every time the method poll is called, a new stage is loaded, and control is returned to the caller. Each stage is generally a sub-resource that is loaded by the main resource. For example, if you’re loading a scene that loads 10 images, each image will be one stage.
+
+### Usage
+[http://docs.godotengine.org/en/3.1/tutorials/io/background_loading.html#doc-background-loading](More info)
 
 ---
 
