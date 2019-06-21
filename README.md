@@ -37,5 +37,27 @@ func _ready():
   screensize = get_viewport_rect().size
 ```
 
+### Hide
+```javascript
+hide()
+```
+
+### Free
+```javascript
+queue.free()
+```
+
+### Disable Node
+```javascript
+$CollisionShape2D.disabled = true/false
+```
+
+## SIGNALS
+```javascript
+signal hit
+```
+
+
+
 
 
