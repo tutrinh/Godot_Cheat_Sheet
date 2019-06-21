@@ -21,7 +21,7 @@ clamp() = restrict values in given range
 
 ## SCRIPTS
 ### Update Function
-```javascript
+```python
 func _process(delta):
   if condition:
     do something
