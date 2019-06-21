@@ -1,6 +1,9 @@
 # Godot_Cheat_Sheet
 Godot 3.1 Cheat Sheet
 
+Basic GD scripts
+https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget
+
 ### Naming Convention
 
 - Class - PascalCase
