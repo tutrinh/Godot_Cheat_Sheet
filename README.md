@@ -57,6 +57,19 @@ $CollisionShape2D.disabled = true/false
 signal hit
 ```
 
+## PHYSICS BODY
+### PhysicsBody2D Mask
+If you don't want the enemies to collide with each other then in the MASK property, uncheck the first box. They won't collide with each other
+
+## INSPECTOR
+### Exports
+This will let the inspector (GUI) to change the values of the variables 
+```python
+export (int) var min_speed
+```
+
+
+
 
 
 
