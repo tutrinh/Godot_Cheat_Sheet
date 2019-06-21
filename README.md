@@ -60,10 +60,27 @@ $CollisionShape2D.disabled = true/false
 
 ### Path2D
 
+### ColorRect for BG Solid Colors
+
+### Sound Effects
+
+#### AudioStreamPlayer (node)
+
+### Particles
+
+### Tween
+```python
+interpolate_property()
+```
+
+### Animation
+#### AnimationPlayer (Node)
+
 
 ## SIGNALS
 ```javascript
 signal hit
+emit_signal("hit")
 ```
 
 ## PHYSICS BODY
@@ -88,11 +105,19 @@ export (PackedScene) var Mob
 Click on the chain link icon on the left panel under the Scene tab.
 
 
-## HUD / CanvasLayer
-### Control Nodes
+## HUD / CanvasLayer/ Sits above the Game / UI
+### Control Nodes for UI
 - Buttons
 - Labels
+- TextureRect
+- TextureProgress
+- TextureButtons
 
+### Properties of Control Nodes
+- Positions
+- Size
+- Anchors
+- Margins
 
 
 
