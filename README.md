@@ -37,6 +37,12 @@ func _ready():
   screensize = get_viewport_rect().size
 ```
 
+### Randomize
+```python
+randomize() //this will turn it on
+randi() % n, random integer between 0 and n-1
+```
+
 ### Hide
 ```javascript
 hide()
@@ -44,13 +50,16 @@ hide()
 
 ### Free
 ```javascript
-queue.free()
+queue_free()
 ```
 
 ### Disable Node
 ```javascript
 $CollisionShape2D.disabled = true/false
 ```
+
+### Path2D
+
 
 ## SIGNALS
 ```javascript
@@ -67,6 +76,22 @@ This will let the inspector (GUI) to change the values of the variables
 ```python
 export (int) var min_speed
 ```
+### PackedScene
+Choosing the Class/Scene you want to instance from the GUI. Drag Mob.tscn from the left, file system, and drop it in the right under the Script Variables in the inspector.
+```python
+export (PackedScene) var Mob
+```
+
+
+## INSTANCE OF A CLASS/TSCN
+### GUI
+Click on the chain link icon on the left panel under the Scene tab.
+
+
+## HUD / CanvasLayer
+### Control Nodes
+- Buttons
+- Labels
 
 
 
