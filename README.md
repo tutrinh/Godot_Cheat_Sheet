@@ -63,8 +63,7 @@ $CollisionShape2D.disabled = true/false
 ### ColorRect for BG Solid Colors
 
 ### Sound Effects
-
-#### AudioStreamPlayer (node)
+**AudioStreamPlayer (node)**
 
 ### Particles
 
@@ -74,7 +73,7 @@ interpolate_property()
 ```
 
 ### Animation
-#### AnimationPlayer (Node)
+**AnimationPlayer (Node)**
 
 
 ## SIGNALS
