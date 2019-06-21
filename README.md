@@ -34,7 +34,7 @@ get_tree().change_scene_to(next_scene)
 Will read file from the disk and load it at compile time.
 ```python
 var res = preload("res://robi.png")
-get_node("sprite").texture =- res
+get_node("sprite").texture = res
 ```
 ### Load instance of a scene
 ```python
@@ -149,6 +149,23 @@ func _ready():
   var obj2= MyObject.new()
   obj2.dict.greeting = "hello2"
 ```
+
+---
+
+## SINGLETON / AUTOLOAD
+Singleton pattern is useful tool for solving the persistent info between scenes.
+### Concept
+- Create objs that are always loaded no matter which snce is running
+- Can store global variables
+- Can handle switching scenes and between scene transitions
+- Act like a singleton
+
+### Autoload a script to act like a singleton
+To autoload a script:
+Project > Project Settings > Autoload Tab > Select the tscn/gd script
+
+
+---
 
 ## HUD / CanvasLayer/ Sits above the Game / UI
 ### Control Nodes for UI
