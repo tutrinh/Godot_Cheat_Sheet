@@ -50,6 +50,21 @@ add_child(bullet)
 Can create new bullet without having to load them again from disk
 
 ## SCRIPTS
+
+### TYPES
+#### Array
+```
+var arr = []
+PoolIntArray // Array of integers
+PoolStringArray // Array of Strings
+PoolColorArray // Array of Color Objects
+
+```
+
+### Colors
+https://docs.godotengine.org/en/3.1/classes/class_color.html#class-color
+
+
 ### Update Function
 ```python
 func _process(delta):
