@@ -44,6 +44,13 @@ Change to one
 - **Stop:** Stop the node no matter what (and children in Inherit mode). When paused this node will not process.
 - **Process:** Process the node no matter what (and children in Inherit mode). Paused or not this node will process.
 
+```python
+func _on_pause_button_pressed():
+    get_tree().paused = true
+    $pause_popup.show()
+```
+
+
 ### Loading images from resources
 ```python
 var res . = load("res://robi.png")
