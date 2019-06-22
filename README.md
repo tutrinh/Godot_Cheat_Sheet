@@ -241,6 +241,78 @@ extends res://path/to/character.gd
 var Character = load("res://path/to/character.gd")
 var character_node = Character.new()
 ```
+Instead, you can give your class a name to register it as a new type in Godot’s editor. For that, you use the ‘class_name’ keyword. You can add an optional comma followed by a path to an image, to use it as an icon. Your class will then appear with its new icon in the editor:
+
+```python
+# Item.gd
+
+extends Node
+
+class_name Item, "res://interface/icons/item.png"
+```
+```python
+# Saved as a file named 'character.gd'.
+
+class_name Character
+
+var health = 5
+
+func print_health():
+    print(health)
+
+func print_this_script_three_times():
+    print(get_script())
+    print(ResourceLoader.load("res://character.gd"))
+    print(Character)
+```
+
+### Inheritance
+```python
+# Inherit/extend a globally available class.
+extends SomeClass
+
+# Inherit/extend a named class file.
+extends "somefile.gd"
+
+# Inherit/extend an inner class in another file.
+extends "somefile.gd".SomeInnerClass
+```
+To check if a given instance inherits from a given class, the is keyword can be used:
+```
+# Cache the enemy class.
+const Enemy = preload("enemy.gd")
+
+# [...]
+
+# Use 'is' to check inheritance.
+if (entity is Enemy):
+    entity.apply_damage()
+```
+### Super
+```python
+func some_func(x):
+    .some_func(x) # Calls same function on the parent class.
+```
+
+### Inner Classes
+A class file can contain inner classes. Inner classes are defined using the class keyword. They are instanced using ttheir ** ClassName.new()** function.
+```python
+# Inside a class file.
+
+# An inner class in this class file.
+class SomeInnerClass:
+    var a = 5
+    func print_value_of_a():
+        print(a)
+
+# This is the constructor of the class file's main class.
+func _init():
+    var c = SomeInnerClass.new()
+    c.print_value_of_a()
+```
+
+Read more [https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget#built-in-types]
+
 
 
 ### Colors
