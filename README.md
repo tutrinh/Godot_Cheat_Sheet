@@ -32,6 +32,18 @@ This can get a little cumbersome, especially when nodes and external references 
 onready var my_label = get_node("MyLabel")
 ```
 
+## Pausing a Game
+https://docs.godotengine.org/en/3.1/tutorials/misc/pausing_games.html
+```python
+get_tree().paused = true
+```
+Make sure to *white-list nodes* you don't want to be affected by the pause
+In the node's inspector, scroll down to Pause.
+Change to one
+- **Inherit:** Process depending on the state of the parent, grandparent, etc. The first parent that has a non-Inherit state.
+- **Stop:** Stop the node no matter what (and children in Inherit mode). When paused this node will not process.
+- **Process:** Process the node no matter what (and children in Inherit mode). Paused or not this node will process.
+
 ### Loading images from resources
 ```python
 var res . = load("res://robi.png")
