@@ -170,6 +170,78 @@ var x = [value] if [expression] else [value]
 y += 3 if y < 10 else -1
 ```
 
+### For
+```
+for x in [5, 7, 11]:
+    statement # Loop iterates 3 times with 'x' as 5, then 7 and finally 11.
+
+var dict = {"a": 0, "b": 1, "c": 2}
+for i in dict:
+    print(dict[i])
+
+for i in range(3):
+    statement # Similar to [0, 1, 2] but does not allocate an array.
+
+for i in range(1,3):
+    statement # Similar to [1, 2] but does not allocate an array.
+
+for i in range(2,8,2):
+    statement # Similar to [2, 4, 6] but does not allocate an array.
+
+for c in "Hello":
+    print(c) # Iterate through all characters in a String, print every letter on new line.
+```
+
+### Match
+A match statement is used to branch execution of a program. It’s the equivalent of the switch statement found in many other languages, but offers some additional features.
+
+```
+match [expression]:
+    [pattern](s):
+        [block]
+    [pattern](s):
+        [block]
+    [pattern](s):
+        [block]
+```
+Same as switch statements
+```
+match x:
+    1:
+        print("We are number one!")
+    2:
+        print("Two are better than one!")
+    "test":
+        print("Oh snap! It's a string!")
+```
+**Wildcard pattern**
+This pattern matches everything. It’s written as a single underscore.
+
+It can be used as the equivalent of the default in a switch statement in other languages.
+
+```
+match x:
+    1:
+        print("It's one!")
+    2:
+        print("It's one times two!")
+    _:
+        print("It's not 1 or 2. I don't care tbh.")
+```
+## Classes
+By default, all script files are unnamed classes. In this case, you can only reference them using the file’s path, using either a relative or an absolute path. For example, if you name a script file character.gd
+
+```python
+# Inherit from Character.gd
+
+extends res://path/to/character.gd
+
+# Load character.gd and create a new node instance from it
+
+var Character = load("res://path/to/character.gd")
+var character_node = Character.new()
+```
+
 
 ### Colors
 https://docs.godotengine.org/en/3.1/classes/class_color.html#class-color
