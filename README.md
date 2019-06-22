@@ -60,6 +60,116 @@ PoolStringArray // Array of Strings
 PoolColorArray // Array of Color Objects
 
 ```
+### Dictionary
+Associative container which contains values referenced by unique keys.
+```
+var d = {4: 5, "A key": "A value", 28: [1, 2, 3]}
+d["Hi!"] = 0
+d = {
+    22: "value",
+    "some_key": 2,
+    "other_key": [2, 3, 4],
+    "more_key": "Hello"
+}
+```
+
+### Casting
+```
+var my_int: int
+my_int = "123" as int # The string can be converted to int
+my_int = Vector2() as int # A Vector2 can't be converted to int, this will cause an error
+```
+
+### Strong Type
+```
+const A: int = 5
+const B: Vector2 = Vector2()
+```
+
+### Enums
+Enums are basically a shorthand for constants, and are pretty useful if you want to assign consecutive integers to some constant.
+
+```
+enum {TILE_BRICK, TILE_FLOOR, TILE_SPIKE, TILE_TELEPORT}
+# Is the same as:
+const TILE_BRICK = 0
+const TILE_FLOOR = 1
+const TILE_SPIKE = 2
+const TILE_TELEPORT = 3
+
+enum State {STATE_IDLE, STATE_JUMP = 5, STATE_SHOOT}
+# Is the same as:
+const State = {STATE_IDLE = 0, STATE_JUMP = 5, STATE_SHOOT = 6}
+# Access values with State.STATE_IDLE, etc.
+```
+
+### Functions
+```
+func my_function(a: int, b: String):
+    pass
+  
+func my_function(int_arg := 42, String_arg := "string"):
+    pass
+    
+
+```
+### Functions with Return Type
+```
+The return type of the function can be specified after the arguments list using the arrow token (->):
+func my_int_function() -> int:
+    return 0
+    
+void_function() -> void:
+    return # Can't return a value
+```
+
+### Functions by References
+Contrary to Python, functions are not first class objects in GDScript. This means they cannot be stored in variables, passed as an argument to another function or be returned from other functions. This is for performance reasons.
+
+To reference a function by name at runtime, (e.g. to store it in a variable, or pass it to another function as an argument) one must use the call or funcref helpers:
+
+```python
+# Call a function by name in one step.
+my_node.call("my_function", args)
+
+# Store a function reference.
+var my_func = funcref(my_node, "my_function")
+# Call stored function reference.
+my_func.call_func(args)
+
+```
+
+### Static Functions
+A function can be declared static. When a function is static, it has no access to the instance member variables or self. This is mainly useful to make libraries of helper functions:
+
+```python
+static func sum2(a, b):
+    return a + b
+```
+
+## Statements and Control Flow
+### if/else/elif
+```
+if [expression]:
+    statement(s)
+elif [expression]:
+    statement(s)
+else:
+    statement(s)
+```
+#### Shorthand
+```
+if 1 + 1 == 2: return 2 + 2
+else:
+    var x = 3 + 3
+    return x
+```
+Sometimes you might want to assign a different initial value based on a boolean expression. In this case, ternary-if expressions come in handy:
+```
+var x = [value] if [expression] else [value]
+y += 3 if y < 10 else -1
+```
+
 
 ### Colors
 https://docs.godotengine.org/en/3.1/classes/class_color.html#class-color
