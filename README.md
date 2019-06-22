@@ -114,6 +114,7 @@ tween.is_active()
 
 
 ## SIGNALS
+Signals are a way to send notification messages from an object that other objects can listen to in a generic way. Create custom signals for a class using the signal keyword.
 ```javascript
 signal hit
 emit_signal("hit")
@@ -122,6 +123,38 @@ emit_signal("hit")
 ## PHYSICS BODY
 ### PhysicsBody2D Mask
 If you don't want the enemies to collide with each other then in the MASK property, uncheck the first box. They won't collide with each other
+
+## Setters/getters
+It is often useful to know when a class’ member variable changes for whatever reason. It may also be desired to encapsulate its access in some way.
+
+```javascript
+var variable = value setget setterfunc, getterfunc
+```
+
+Whenever the value of variable is modified by an external source (i.e. not from local usage in the class), the setter function (setterfunc above) will be called. This happens before the value is changed. The setter must decide what to do with the new value. Vice versa, when variable is accessed, the getter function (getterfunc above) must return the desired value.
+
+```javascript
+var myvar setget my_var_set, my_var_get
+
+func my_var_set(new_value):
+    my_var = new_value
+
+func my_var_get():
+    return my_var # Getter must return a value.
+```
+
+Either of the setter or getter functions can be omitted:
+
+```javascript
+# Only a setter.
+var my_var = 5 setget myvar_set
+# Only a getter (note the comma).
+var my_var = 5 setget ,myvar_get
+```
+
+
+
+---
 
 ## INSPECTOR
 ### Exports
