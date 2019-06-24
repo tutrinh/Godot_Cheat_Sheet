@@ -269,6 +269,27 @@ match x:
         print("It's not 1 or 2. I don't care tbh.")
 ```
 
+```python
+func _on_button_pressed(button):
+    if settings.enable_sound:
+        $Click.play()
+    match button.name:
+        "Home":
+            change_screen($TitleScreen)
+        "Play":
+            change_screen(null)
+            yield(get_tree().create_timer(0.5), "timeout")
+            emit_signal("start_game")
+        "Settings":
+            change_screen($SettingsScreen)
+        "Sound":
+            settings.enable_sound = !settings.enable_sound
+            button.texture_normal = sound_buttons[settings.enable_sound]
+        "Music":
+            settings.enable_music = !settings.enable_music
+            button.texture_normal = music_buttons[settings.enable_music]
+```
+
 ### While
 ```python
 var i = 0
