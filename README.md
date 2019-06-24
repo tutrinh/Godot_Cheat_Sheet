@@ -510,6 +510,7 @@ func _ready():
    var handler = your_handler.new()
 
    notifier.connect("data_found", handler, "your_handler")
+   owner_of_signal.connection("signal_name", who_is_listening, "who_is_listening_function_name")
 ```
 
 ```python
@@ -552,6 +553,7 @@ func _ready():
    var handler = your_handler.new()
 
    notifier.connect("data_found", handler, "your_handler", [notifier])
+   owner_of_signal.connection("signal_name", who_is_listening, "who_is_listening_function_name", [owner_of_signal has the data])
 ```
 
 ### Custom Signals
