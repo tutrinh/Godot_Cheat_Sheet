@@ -464,6 +464,17 @@ Audio files: **OGG** for looping music, **WAV** for Sound Effects
 ASP.stream = load("res://Assets/Sounds/BG/loop1.ogg")
 ASP.play()
 
+#### Creating AudioStreamPlayer Node from code
+```python
+var asp = AudioStreamPlayer.new()
+
+func _ready():
+    # set the stream
+    asp.stream = load("res://Assets/Sounds/BG/loop1.ogg)
+    add_child(asp)
+    asp.play()
+```
+
 ### Particles
 
 ### Tween
