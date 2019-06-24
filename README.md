@@ -32,6 +32,13 @@ This can get a little cumbersome, especially when nodes and external references 
 onready var my_label = get_node("MyLabel")
 ```
 
+```python
+onready var bg = $ColorRect
+
+func _ready():
+    bg.color = Color("FFFFFF")
+```
+
 ## Pausing a Game
 https://docs.godotengine.org/en/3.1/tutorials/misc/pausing_games.html
 ```python
