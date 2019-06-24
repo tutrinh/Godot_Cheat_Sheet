@@ -649,6 +649,9 @@ yield(get_node("AnimationPlayer"), "finished")
 
 # Wait 5 seconds, then resume execution.
 yield(get_tree().create_timer(5.0), "timeout")
+
+# Creating delay
+yield(get_tree().create_timer(2), "timeout")
 ```
 Coroutines themselves use the completed signal when they transition into an invalid state, for example:
 ```python
