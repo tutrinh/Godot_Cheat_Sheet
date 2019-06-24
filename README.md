@@ -554,6 +554,45 @@ func _ready():
    notifier.connect("data_found", handler, "your_handler", [notifier])
 ```
 
+### Custom Signals
+```python
+signal my_signal
+signal my_signal_with_arguments(x, y)
+```
+```python
+func _ready():
+   emit_signal("my_signal")
+   emit_signal("my_signal_with_arguments", 1, 2)
+```
+
+```python
+# VIA CODE
+# CONNECT with options of DEFERRED OR ONESHOT (Connect then disconnect)
+object.connect("my_signal", self, "_on_Timer_my_signal", [], CONNECT_DEFERRED | CONNECT_ONESHOT)
+
+# DISCONNECT
+disconnect("my_signal", self, "_on_my_signal")
+
+```
+```python
+# In myCustomObject.tscn
+signal my_signal
+
+func emit():
+   emit_signal("my_signal")
+```
+```python
+# Create an instance of the so-called myCustomObject.tscn scene.
+func _ready():
+   var mco = load("res://myCustomObject.tscn").instance()
+   mco.connect("my_signal", self, "_on_my_signal")
+   add_child(mco)   
+   get_child(0).emit()
+   
+func _on_my_signal():
+   print("signal")
+```
+
 ## YIELD
 GDScript offers support for coroutines via the yield built-in function. Calling yield() will immediately return from the current function, with the current frozen state of the same function as the return value. Calling resume on this resulting object will continue execution and return whatever the function returns. Once resumed, the state object becomes invalid. Here is an example:
 
