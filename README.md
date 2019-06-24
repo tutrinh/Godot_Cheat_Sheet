@@ -457,7 +457,12 @@ $CollisionShape2D.disabled = true/false
 ### ColorRect for BG Solid Colors
 
 ### Sound Effects
+Use program call *Audacity* to convert to OGG, WAV
 **AudioStreamPlayer (node)**
+Audio files: **OGG** for looping music, **WAV** for Sound Effects
+
+ASP.stream = load("res://Assets/Sounds/BG/loop1.ogg")
+ASP.play()
 
 ### Particles
 
