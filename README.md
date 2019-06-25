@@ -142,7 +142,7 @@ func save_settings():
 
 ### Loading images from resources
 ```python
-var res . = load("res://robi.png")
+var res = load("res://robi.png")
 get_node("sprite").texture = res
 ```
 
