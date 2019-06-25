@@ -103,6 +103,42 @@ func _on_pause_button_pressed():
     $pause_popup.show()
 ```
 
+## Saving Game
+Save settings from a game.
+- Create Settings.gd, this is your global settings
+- Add to Project > Project Settings > Autoload > Add Settings.gd
+
+```python
+
+var enable_sound = true
+var enable_music = true
+
+# PRELOADING THE IMAGE TEXTURES
+var sound_buttons = {true: preload("res://assets/images/buttons/audioOn.png"),
+                    false: preload("res://assets/images/buttons/audioOff.png")}
+var music_buttons = {true: preload("res://assets/images/buttons/musicOn.png"),
+                    false: preload("res://assets/images/buttons/musicOff.png")}
+
+var settings_file = "user://settings.save"
+
+# SAVE function
+func save_settings():
+    var f = File.new()
+    f.open(settings_file, File.WRITE)
+    f.store_var(enable_sound)
+    f.store_var(enable_music)
+    f.close()
+
+# LOAD function
+    var f = File.new()
+    if f.file_exists(settings_file):
+        f.open(settings_file, File.READ)
+        enable_sound = f.get_var()
+        enable_music = f.get_var()
+        f.close()
+
+```
+
 
 ### Loading images from resources
 ```python
