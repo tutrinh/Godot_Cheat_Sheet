@@ -13,9 +13,55 @@ https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_
 ```javascript
 Object/Class is a .tscsn
 ```
+
+### Scene Tree
+```python
+get_tree()
+```
+### Useful functions
+```python
+# Create timer
+create_timer ( float time_sec, bool pause_mode_process=true )
+
+# Get Current Scene
+current_scene
+
+# Change Scene
+change_scene(path)
+
+# Get Nodes in Group
+get_nodes_in_group ( String group )
+
+# Has Group
+has_group ( String name ) const
+
+# Reload Current Scene
+reload_current_scene ( )
+
+
+
+
+```
+
 ### Get Node
 ```javascript
 get_node("NameOfNode") same as $NameOfNode
+```
+
+### Add to Group
+```python
+add_to_group("enemies")
+```
+### Calling Members of the Group
+```python
+func _on_discovered(): # This is a purely illustrative function.
+    get_tree().call_group("enemies", "player_was_discovered")
+The above code calls the function player_was_discovered on every member of the group enemies.
+```
+
+### Getting Members from the Group
+```python
+var enemies = get_tree().get_nodes_in_group("enemies")
 ```
 
 ## Onready Keyword
@@ -288,6 +334,30 @@ func _on_button_pressed(button):
         "Music":
             settings.enable_music = !settings.enable_music
             button.texture_normal = music_buttons[settings.enable_music]
+```
+
+#### Using For and Match for Groups
+```python
+func _ready():
+    register_buttons()
+    
+func register_buttons():
+    var buttons = get_tree().get_nodes_in_group("buttons)
+    # for loop
+    for button in buttons:
+        button.connect("pressed", self, "_on_button_pressed", [button.name] #creating argument)
+        
+func _on_button_pressed(name):
+    match name:
+         "Home":
+            change_screen($TitleScreen)
+        "Play":
+            change_screen(null)
+            yield(get_tree().create_timer(0.5), "timeout")
+            emit_signal("start_game")
+        "Settings":
+            change_screen($SettingsScreen)
+            
 ```
 
 ### While
