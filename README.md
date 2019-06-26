@@ -64,6 +64,25 @@ The above code calls the function player_was_discovered on every member of the g
 var enemies = get_tree().get_nodes_in_group("enemies")
 ```
 
+### Instance vs. New
+#### Creating a node use new()
+```python
+var s
+func _ready():
+    s = Sprite.new() # Create a new sprite!
+    add_child(s) # Add it as a child of this node.
+```
+#### Instance is for Scenes
+Instancing a scene from code is done in two steps. The first one is to load the scene from your hard drive:
+```python
+var scene = preload("res://myscene.tscn") # Will load when parsing the script.
+```
+```python
+var node = scene.instance()
+add_child(node)
+```
+The advantage of this two-step process is that a packed scene may be kept loaded and ready to use so that you can create as many instances as desired. This is especially useful to quickly instance several enemies, bullets, and other entities in the active scene.
+
 ## Onready Keyword
 When using nodes, it’s common to desire to keep references to parts of the scene in a variable. As scenes are only warranted to be configured when entering the active scene tree, the sub-nodes can only be obtained when a call to *Node._ready()* is made.
 ```python
