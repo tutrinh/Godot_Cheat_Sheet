@@ -531,7 +531,7 @@ func _shoot() -> void:
     animation_player.play("shoot)
 
 ```
-#### Pistol 
+#### Pistol inherit from Gun.gd
 ```python
 Pistol.gd
 
@@ -544,6 +544,32 @@ func _shoot() -> viod:
     add_child(new_bullet)
     new_bullet.global_position = barrel.global_position
 
+```
+
+#### Shotgun inherit from Gun.gd
+```python
+extends Gun
+
+export(int, 5, 25) var spread_percentage := 25
+export var projectiles := 4
+
+func _ready() -> void:
+    randomize() #turn on randomizing
+    
+# Loop
+func _shoot() -> void:
+    .shoot() # Calling function shoot from super b/c same function name
+    for i in range(projectiles):
+        var new_bullet = bullet.instance()
+        var bullet_y_spread = randf() * (spread_percentage / 1000.0) * sign(rand_range(-1, 1)) 
+        # what is sign 
+        # sign(-6) # returns -1
+        # sign(0)  # returns 0
+        # sign(6)  # returns 1
+        new_bullet.initialize(direction + Vector2(0, bullet_y_spread)).normalized())
+        add_child(new_bullet)
+        new_bullet.global_position = barrel.global_postion
+    
 ```
 
 ### Inheritance
