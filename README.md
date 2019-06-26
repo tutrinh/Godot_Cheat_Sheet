@@ -482,6 +482,9 @@ func _on_body_entered(body) -> void:
         body.damage(damage) #calling function damage from Enemy object and passing damage parameter
     queue_free() # destroying self once hit
     
+func initialize(_direction: Vector2) -> void:
+    direction = _direction
+    
 ```
 #### Enemy.gd, custom class
 ```python
