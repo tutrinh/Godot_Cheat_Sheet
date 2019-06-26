@@ -225,6 +225,18 @@ const State = {STATE_IDLE = 0, STATE_JUMP = 5, STATE_SHOOT = 6}
 # Access values with State.STATE_IDLE, etc.
 ```
 
+### Vector2, built ins
+
+Useage: Vector2.RIGHT
+
+- ZERO = Vector2( 0, 0 ) — Zero vector.
+- ONE = Vector2( 1, 1 ) — One vector.
+- INF = Vector2( inf, inf ) — Infinite vector.
+- LEFT = Vector2( -1, 0 ) — Left unit vector.
+- RIGHT = Vector2( 1, 0 ) — Right unit vector.
+- UP = Vector2( 0, -1 ) — Up unit vector.
+- DOWN = Vector2( 0, 1 ) — Down unit vector.
+
 ### Functions
 ```
 func my_function(a: int, b: String):
@@ -441,6 +453,97 @@ func print_this_script_three_times():
     print(get_script())
     print(ResourceLoader.load("res://character.gd"))
     print(Character)
+```
+
+More example of using *class_name* (will create a new type object in Godot) to created classes and make new objects from them
+
+#### Bullet.gd
+```python
+Bullet.gd
+
+extends Area2D
+
+export var damaage := 15
+export var move_speed := 500
+
+var direction : Vector2
+
+func _ready() -> void: #onready
+    set_as_toplevel(true)
+    connect("body_entered", self, "_on_body_entered") # make a signal connection
+    
+func _process(delta:float) -> void: #calls every second
+    position += direction * move_speed * delta
+    
+func _on_body_entered(body) -> void:
+    if body.is_a_parent_of(self):
+        return
+    if body is Enemy: #a custom type, new class called Enemy, Enemy.gd
+        body.damage(damage) #calling function damage from Enemy object and passing damage parameter
+    queue_free() # destroying self once hit
+    
+```
+#### Enemy.gd, custom class
+```python
+Enemy.gd has a Enemy.tscn because it contains Animation Player
+extends Kinematic2D
+class_name Enemy
+
+onready var animation_player : AnimationPlayer = $AnimationPlayer
+onready var collision_shape : CollisionShape2D = $CollisionShape2D
+
+export var health := 100
+
+func damage(value: int) -> void:
+    if health == 0:
+        return
+    health = max(0, health - value)
+    if health == 0:
+        animation_player.play("die")
+        collision_shape.queue_free()
+        yield(animation_player, "animation_finished") #waiting for animation to finished
+        queue_free() # Enemy destroy self put in que for next cycle
+    animation_player.plya("damage")
+```
+
+Another Example
+#### Gun class
+```python
+Gun.gd, Has Gun.tscn attached because of AnimationPlayer
+
+extends Node2D
+class_name Gun
+
+onready var animated_player : AnimationPlayer = $AnimationPlayer
+onready var barrel : Position2D = $Sprite/Barrel
+onready var sprite : Sprite = $Sprite
+onready var timer : timer = $Timer
+
+export var fire_rate := 5 #setting default values with export
+export var bullet : PackedScene # Declared for bullet.tscn 
+
+var direction := Vector2.RIGHT
+
+func _ready() -> void:
+    timer.wait_time = 1.0 / fire_rate
+    
+func _shoot() -> void:
+    animation_player.play("shoot)
+
+```
+#### Pistol 
+```python
+Pistol.gd
+
+extends Gun
+
+func _shoot() -> viod:
+    .shoot() # Calling function from super (Gun.gd) to shoot because has same function name
+    timer.start()
+    var new_bullet := bullet.instance()
+    add_child(new_bullet)
+    new_bullet.global_position = barrel.global_position
+
 ```
 
 ### Inheritance
