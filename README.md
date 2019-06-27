@@ -783,6 +783,18 @@ func _on_tween_completed():
     _start_tween()
 ```
 
+### VisibilityNotifier
+```python
+onready var visibility_notifier = get_node("VisibilityNotifier")
+
+func _ready():
+    visibility_notifer.connect("screen_entered", self, "_on_visibility_notifier_screen_entered")
+```
+
+### VisibilityEnabler2D
+Enable/disable based on screen visibility
+
+
 ### Animation
 **AnimationPlayer (Node)**
 
