@@ -762,6 +762,27 @@ tween.start()
 tween.is_active()
 ```
 
+#### Tweening Back and Forth
+```python
+onready var tween = $Tween
+
+onready var tween_values = [0, 30]
+
+func _ready():
+    _start_tween()
+
+func _start_tween():
+    tween.interpolate_property($Capsule, "rotation_degrees", tween_values[0], tween_values[1], 1,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+    tween.start()
+    yield(tween, "tween_completed")
+    _on_tween_completed()
+    
+
+func _on_tween_completed():
+    tween_values.invert()
+    _start_tween()
+```
+
 ### Animation
 **AnimationPlayer (Node)**
 
