@@ -1041,6 +1041,13 @@ This will let the inspector (GUI) to change the values of the variables
 export (int) var min_speed
 export (Array, String) var strings
 ```
+
+### Eport Enums as List
+```python
+enum DROPOFF { linear,square,none }
+export(DROPOFF) var dropoff = DROPOFF.linear
+```
+
 ### PackedScene
 Choosing the Class/Scene you want to instance from the GUI. Drag Mob.tscn from the left, file system, and drop it in the right under the Script Variables in the inspector.
 ```python
