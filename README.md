@@ -94,6 +94,43 @@ add_child(node)
 ```
 The advantage of this two-step process is that a packed scene may be kept loaded and ready to use so that you can create as many instances as desired. This is especially useful to quickly instance several enemies, bullets, and other entities in the active scene.
 
+## Resource? (.tres)
+
+### Scriptable Objects (.tres)
+Objects that can store data, alternative to jSON
+
+```python
+ClassStats.gd
+# When creating a new gdscript change the inherit from node to resource
+extends Resource
+class_name ClassStats
+
+export(String) var class_type ="Knight"
+export(int) var health = 100
+export(int) var strength = 100
+export(Image) var profile = null
+```
+```python
+# Create a new resource that will hold the data from ClassStats Class
+# Wizard.tres
+Now you can change the values in the editor
+This will store predefined data from the ClassStats with the updated values
+
+```
+#### Usage
+```python
+From another node
+# load the resource that that the data you want to use
+onready var character_data = load("res://Wizard.tres")
+func _ready():
+    
+    character_data.profile
+    character_data.health
+    
+    
+```
+
+
 ## Onready Keyword
 When using nodes, it’s common to desire to keep references to parts of the scene in a variable. As scenes are only warranted to be configured when entering the active scene tree, the sub-nodes can only be obtained when a call to *Node._ready()* is made.
 ```python
