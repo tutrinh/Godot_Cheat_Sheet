@@ -47,6 +47,17 @@ reload_current_scene ( )
 ```javascript
 get_node("NameOfNode") same as $NameOfNode
 ```
+#### Assigning Node in the Editor using the Export keyword from your script
+```python
+var target
+export(NodePath) var targetPath
+
+func _ready():
+    target = get_get_node(targetPath)
+
+```
+
+
 
 ### Add to Group
 ```python
