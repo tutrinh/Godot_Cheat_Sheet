@@ -1,24 +1,27 @@
-# Godot_Cheat_Sheet
+# Godot\_Cheat\_Sheet
+
 Godot 3.1 Cheat Sheet
 
-Basic GD scripts
-https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget
+Basic GD scripts [https://docs.godotengine.org/en/3.1/getting\_started/scripting/gdscript/gdscript\_basics.html?highlight=setget](https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget)
 
 ### Naming Convention
 
-- Class - PascalCase
-- Variables - snake_case
-- Const - ALL_CAPS
+* Class - PascalCase
+* Variables - snake\_case
+* Const - ALL\_CAPS
 
 ```javascript
 Object/Class is a .tscsn
 ```
 
 ### Scene Tree
+
 ```python
 get_tree()
 ```
+
 ### Useful functions
+
 ```python
 # Create timer
 create_timer ( float time_sec, bool pause_mode_process=true )
@@ -37,33 +40,32 @@ has_group ( String name ) const
 
 # Reload Current Scene
 reload_current_scene ( )
-
-
-
-
 ```
 
 ### Get Node
+
 ```javascript
 get_node("NameOfNode") same as $NameOfNode
 ```
+
 #### Assigning Node in the Editor using the Export keyword from your script
+
 ```python
 var target
 export(NodePath) var targetPath
 
 func _ready():
     target = get_get_node(targetPath)
-
 ```
 
-
-
 ### Add to Group
+
 ```python
 add_to_group("enemies")
 ```
+
 ### Calling Members of the Group
+
 ```python
 func _on_discovered(): # This is a purely illustrative function.
     get_tree().call_group("enemies", "player_was_discovered")
@@ -71,32 +73,41 @@ The above code calls the function player_was_discovered on every member of the g
 ```
 
 ### Getting Members from the Group
+
 ```python
 var enemies = get_tree().get_nodes_in_group("enemies")
 ```
 
 ### Instance vs. New
-#### Creating a node use new()
+
+#### Creating a node use new\(\)
+
 ```python
 var s
 func _ready():
     s = Sprite.new() # Create a new sprite!
     add_child(s) # Add it as a child of this node.
 ```
+
 #### Instance is for Scenes
+
 Instancing a scene from code is done in two steps. The first one is to load the scene from your hard drive:
+
 ```python
 var scene = preload("res://myscene.tscn") # Will load when parsing the script.
 ```
+
 ```python
 var node = scene.instance()
 add_child(node)
 ```
+
 The advantage of this two-step process is that a packed scene may be kept loaded and ready to use so that you can create as many instances as desired. This is especially useful to quickly instance several enemies, bullets, and other entities in the active scene.
 
-## Resource? (.tres)
+## Resource? \(.tres\)
 
-### Scriptable Objects (.tres)
+### Scriptable Objects \(.tres\)
+
 Objects that can store data, alternative to jSON
 
 ```python
@@ -110,29 +121,30 @@ export(int) var health = 100
 export(int) var strength = 100
 export(Image) var profile = null
 ```
+
 ```python
 # Create a new resource that will hold the data from ClassStats Class
 # Wizard.tres
 Now you can change the values in the editor
 This will store predefined data from the ClassStats with the updated values
-
 ```
+
 #### Usage
+
 ```python
 From another node
 # load the resource that that the data you want to use
 onready var character_data = load("res://Wizard.tres")
 func _ready():
-    
+
     character_data.profile
     character_data.health
-    
-    
 ```
 
-
 ## Onready Keyword
-When using nodes, it’s common to desire to keep references to parts of the scene in a variable. As scenes are only warranted to be configured when entering the active scene tree, the sub-nodes can only be obtained when a call to *Node._ready()* is made.
+
+When using nodes, it’s common to desire to keep references to parts of the scene in a variable. As scenes are only warranted to be configured when entering the active scene tree, the sub-nodes can only be obtained when a call to _Node.\_ready\(\)_ is made.
+
 ```python
 var my_label
 
@@ -140,7 +152,8 @@ func _ready():
     my_label = get_node("MyLabel")
 ```
 
-This can get a little cumbersome, especially when nodes and external references pile up. For this, GDScript has the onready keyword, that defers initialization of a member variable until _ready is called. It can replace the above code with a single line:
+This can get a little cumbersome, especially when nodes and external references pile up. For this, GDScript has the onready keyword, that defers initialization of a member variable until \_ready is called. It can replace the above code with a single line:
+
 ```python
 onready var my_label = get_node("MyLabel")
 ```
@@ -153,16 +166,18 @@ func _ready():
 ```
 
 ## Pausing a Game
-https://docs.godotengine.org/en/3.1/tutorials/misc/pausing_games.html
+
+[https://docs.godotengine.org/en/3.1/tutorials/misc/pausing\_games.html](https://docs.godotengine.org/en/3.1/tutorials/misc/pausing_games.html)
+
 ```python
 get_tree().paused = true
 ```
-Make sure to *white-list nodes* you don't want to be affected by the pause
-In the node's inspector, scroll down to Pause.
-Change to one
-- **Inherit:** Process depending on the state of the parent, grandparent, etc. The first parent that has a non-Inherit state.
-- **Stop:** Stop the node no matter what (and children in Inherit mode). When paused this node will not process.
-- **Process:** Process the node no matter what (and children in Inherit mode). Paused or not this node will process.
+
+Make sure to _white-list nodes_ you don't want to be affected by the pause In the node's inspector, scroll down to Pause. Change to one
+
+* **Inherit:** Process depending on the state of the parent, grandparent, etc. The first parent that has a non-Inherit state.
+* **Stop:** Stop the node no matter what \(and children in Inherit mode\). When paused this node will not process.
+* **Process:** Process the node no matter what \(and children in Inherit mode\). Paused or not this node will process.
 
 ```python
 func _on_pause_button_pressed():
@@ -171,12 +186,13 @@ func _on_pause_button_pressed():
 ```
 
 ## Saving Game
+
 Save settings from a game.
-- Create Settings.gd, this is your global settings
-- Add to Project > Project Settings > Autoload > Add Settings.gd
+
+* Create Settings.gd, this is your global settings
+* Add to Project &gt; Project Settings &gt; Autoload &gt; Add Settings.gd
 
 ```python
-
 var enable_sound = true
 var enable_music = true
 
@@ -203,55 +219,64 @@ func save_settings():
         enable_sound = f.get_var()
         enable_music = f.get_var()
         f.close()
-
 ```
 
-
 ### Loading images from resources
+
 ```python
 var res = load("res://robi.png")
 get_node("sprite").texture = res
 ```
 
 ### Changing Scene
+
 ```python
 get_tree().change_scene("res://levels/level2.tscn")
 -
 var next_scene = preload("res://levels/level2.tscn")
 get_tree().change_scene_to(next_scene)
-
 ```
 
 ### Saving Game
-[http://docs.godotengine.org/en/3.1/tutorials/io/saving_games.html] (Saving)
+
+\[[http://docs.godotengine.org/en/3.1/tutorials/io/saving\_games.html](http://docs.godotengine.org/en/3.1/tutorials/io/saving_games.html)\] \(Saving\)
 
 ### Preload resources
+
 Will read file from the disk and load it at compile time.
+
 ```python
 var res = preload("res://robi.png")
 get_node("sprite").texture = res
 ```
+
 ### Load instance of a scene
+
 ```python
 var bullet = preload("res://bullet.tscn").instance()
 add_child(bullet)
 ```
+
 Can create new bullet without having to load them again from disk
 
 ## SCRIPTS
 
 ### TYPES
+
 #### Array
-```
+
+```text
 var arr = []
 PoolIntArray // Array of integers
 PoolStringArray // Array of Strings
 PoolColorArray // Array of Color Objects
+```
 
-```
 ### Dictionary
+
 Associative container which contains values referenced by unique keys.
-```
+
+```text
 var d = {4: 5, "A key": "A value", 28: [1, 2, 3]}
 d["Hi!"] = 0
 d = {
@@ -263,22 +288,25 @@ d = {
 ```
 
 ### Casting
-```
+
+```text
 var my_int: int
 my_int = "123" as int # The string can be converted to int
 my_int = Vector2() as int # A Vector2 can't be converted to int, this will cause an error
 ```
 
 ### Strong Type
-```
+
+```text
 const A: int = 5
 const B: Vector2 = Vector2()
 ```
 
 ### Enums
+
 Enums are basically a shorthand for constants, and are pretty useful if you want to assign consecutive integers to some constant.
 
-```
+```text
 enum {TILE_BRICK, TILE_FLOOR, TILE_SPIKE, TILE_TELEPORT}
 # Is the same as:
 const TILE_BRICK = 0
@@ -296,38 +324,40 @@ const State = {STATE_IDLE = 0, STATE_JUMP = 5, STATE_SHOOT = 6}
 
 Useage: Vector2.RIGHT
 
-- ZERO = Vector2( 0, 0 ) — Zero vector.
-- ONE = Vector2( 1, 1 ) — One vector.
-- INF = Vector2( inf, inf ) — Infinite vector.
-- LEFT = Vector2( -1, 0 ) — Left unit vector.
-- RIGHT = Vector2( 1, 0 ) — Right unit vector.
-- UP = Vector2( 0, -1 ) — Up unit vector.
-- DOWN = Vector2( 0, 1 ) — Down unit vector.
+* ZERO = Vector2\( 0, 0 \) — Zero vector.
+* ONE = Vector2\( 1, 1 \) — One vector.
+* INF = Vector2\( inf, inf \) — Infinite vector.
+* LEFT = Vector2\( -1, 0 \) — Left unit vector.
+* RIGHT = Vector2\( 1, 0 \) — Right unit vector.
+* UP = Vector2\( 0, -1 \) — Up unit vector.
+* DOWN = Vector2\( 0, 1 \) — Down unit vector.
 
 ### Functions
-```
+
+```text
 func my_function(a: int, b: String):
     pass
-  
+
 func my_function(int_arg := 42, String_arg := "string"):
     pass
-    
+```
 
-```
 ### Functions with Return Type
-```
+
+```text
 The return type of the function can be specified after the arguments list using the arrow token (->):
 func my_int_function() -> int:
     return 0
-    
+
 void_function() -> void:
     return # Can't return a value
 ```
 
 ### Functions by References
+
 Contrary to Python, functions are not first class objects in GDScript. This means they cannot be stored in variables, passed as an argument to another function or be returned from other functions. This is for performance reasons.
 
-To reference a function by name at runtime, (e.g. to store it in a variable, or pass it to another function as an argument) one must use the call or funcref helpers:
+To reference a function by name at runtime, \(e.g. to store it in a variable, or pass it to another function as an argument\) one must use the call or funcref helpers:
 
 ```python
 # Call a function by name in one step.
@@ -337,20 +367,24 @@ my_node.call("my_function", args)
 var my_func = funcref(my_node, "my_function")
 # Call stored function reference.
 my_func.call_func(args)
-
 ```
 
 ### Static Functions
+
 A function can be declared static. When a function is static, it has no access to the instance member variables or self. This is mainly useful to make libraries of helper functions:
 
 ```python
 static func sum2(a, b):
     return a + b
+    
+// like a utility function to perform an operation
 ```
 
 ## Statements and Control Flow
+
 ### if/else/elif
-```
+
+```text
 if [expression]:
     statement(s)
 elif [expression]:
@@ -358,21 +392,26 @@ elif [expression]:
 else:
     statement(s)
 ```
+
 #### Shorthand
-```
+
+```text
 if 1 + 1 == 2: return 2 + 2
 else:
     var x = 3 + 3
     return x
 ```
-Sometimes you might want to assign a different initial value based on a boolean expression. In this case, ternary-if expressions come in handy:
-```
+
+Sometimes you might want to assign a different initial value based on a boolean expression. In this case, ternary-if expressions comes in handy:
+
+```text
 var x = [value] if [expression] else [value]
 y += 3 if y < 10 else -1
 ```
 
 ### For
-```
+
+```text
 for x in [5, 7, 11]:
     statement # Loop iterates 3 times with 'x' as 5, then 7 and finally 11.
 
@@ -394,9 +433,10 @@ for c in "Hello":
 ```
 
 ### Match
+
 A match statement is used to branch execution of a program. It’s the equivalent of the switch statement found in many other languages, but offers some additional features.
 
-```
+```text
 match [expression]:
     [pattern](s):
         [block]
@@ -405,8 +445,10 @@ match [expression]:
     [pattern](s):
         [block]
 ```
+
 Same as switch statements
-```
+
+```text
 match x:
     1:
         print("We are number one!")
@@ -415,12 +457,12 @@ match x:
     "test":
         print("Oh snap! It's a string!")
 ```
-**Wildcard pattern**
-This pattern matches everything. It’s written as a single underscore.
+
+**Wildcard pattern** This pattern matches everything. It’s written as a single underscore.
 
 It can be used as the equivalent of the default in a switch statement in other languages.
 
-```
+```text
 match x:
     1:
         print("It's one!")
@@ -452,16 +494,17 @@ func _on_button_pressed(button):
 ```
 
 #### Using For and Match for Groups
+
 ```python
 func _ready():
     register_buttons()
-    
+
 func register_buttons():
     var buttons = get_tree().get_nodes_in_group("buttons)
     # for loop
     for button in buttons:
         button.connect("pressed", self, "_on_button_pressed", [button.name] #creating argument)
-        
+
 func _on_button_pressed(name):
     match name:
          "Home":
@@ -472,10 +515,10 @@ func _on_button_pressed(name):
             emit_signal("start_game")
         "Settings":
             change_screen($SettingsScreen)
-            
 ```
 
 ### While
+
 ```python
 var i = 0
 
@@ -485,6 +528,7 @@ while i < strings.size():
 ```
 
 ## Classes
+
 By default, all script files are unnamed classes. In this case, you can only reference them using the file’s path, using either a relative or an absolute path. For example, if you name a script file character.gd
 
 ```python
@@ -497,7 +541,8 @@ extends res://path/to/character.gd
 var Character = load("res://path/to/character.gd")
 var character_node = Character.new()
 ```
-Instead, you can give your class a name to register it as a new type in Godot’s editor. For that, you use the ‘class_name’ keyword. You can add an optional comma followed by a path to an image, to use it as an icon. Your class will then appear with its new icon in the editor:
+
+Instead, you can give your class a name to register it as a new type in Godot’s editor. For that, you use the ‘class\_name’ keyword. You can add an optional comma followed by a path to an image, to use it as an icon. Your class will then appear with its new icon in the editor:
 
 ```python
 # Item.gd
@@ -506,6 +551,7 @@ extends Node
 
 class_name Item, "res://interface/icons/item.png"
 ```
+
 ```python
 # Saved as a file named 'character.gd'.
 
@@ -522,9 +568,10 @@ func print_this_script_three_times():
     print(Character)
 ```
 
-More example of using *class_name* (will create a new type object in Godot) to created classes and make new objects from them
+More example of using _class\_name_ \(will create a new type object in Godot\) to created classes and make new objects from them
 
 #### Bullet.gd
+
 ```python
 Bullet.gd
 
@@ -538,22 +585,23 @@ var direction : Vector2
 func _ready() -> void: #onready
     set_as_toplevel(true)
     connect("body_entered", self, "_on_body_entered") # make a signal connection
-    
+
 func _process(delta:float) -> void: #calls every second
     position += direction * move_speed * delta
-    
+
 func _on_body_entered(body) -> void:
     if body.is_a_parent_of(self):
         return
     if body is Enemy: #a custom type, new class called Enemy, Enemy.gd
         body.damage(damage) #calling function damage from Enemy object and passing damage parameter
     queue_free() # destroying self once hit
-    
+
 func initialize(_direction: Vector2) -> void:
     direction = _direction
-    
 ```
+
 #### Enemy.gd, custom class
+
 ```python
 Enemy.gd has a Enemy.tscn because it contains Animation Player
 extends Kinematic2D
@@ -577,7 +625,9 @@ func damage(value: int) -> void:
 ```
 
 Another Example
+
 #### Gun class
+
 ```python
 Gun.gd, Has Gun.tscn attached because of AnimationPlayer
 
@@ -596,12 +646,13 @@ var direction := Vector2.RIGHT
 
 func _ready() -> void:
     timer.wait_time = 1.0 / fire_rate
-    
+
 func _shoot() -> void:
     animation_player.play("shoot)
-
 ```
+
 #### Pistol inherit from Gun.gd
+
 ```python
 Pistol.gd
 
@@ -613,10 +664,10 @@ func _shoot() -> viod:
     var new_bullet := bullet.instance()
     add_child(new_bullet)
     new_bullet.global_position = barrel.global_position
-
 ```
 
 #### Shotgun inherit from Gun.gd
+
 ```python
 extends Gun
 
@@ -625,7 +676,7 @@ export var projectiles := 4
 
 func _ready() -> void:
     randomize() #turn on randomizing
-    
+
 # Loop
 func _shoot() -> void:
     .shoot() # Calling function shoot from super b/c same function name
@@ -639,10 +690,10 @@ func _shoot() -> void:
         new_bullet.initialize(direction + Vector2(0, bullet_y_spread)).normalized())
         add_child(new_bullet)
         new_bullet.global_position = barrel.global_postion
-    
 ```
 
 ### Inheritance
+
 ```python
 # Inherit/extend a globally available class.
 extends SomeClass
@@ -653,8 +704,10 @@ extends "somefile.gd"
 # Inherit/extend an inner class in another file.
 extends "somefile.gd".SomeInnerClass
 ```
+
 To check if a given instance inherits from a given class, the is keyword can be used:
-```
+
+```text
 # Cache the enemy class.
 const Enemy = preload("enemy.gd")
 
@@ -664,14 +717,18 @@ const Enemy = preload("enemy.gd")
 if (entity is Enemy):
     entity.apply_damage()
 ```
+
 ### Super
+
 ```python
 func some_func(x):
     .some_func(x) # Calls same function on the parent class.
 ```
 
 ### Inner Classes
-A class file can contain inner classes. Inner classes are defined using the class keyword. They are instanced using ttheir ** ClassName.new()** function.
+
+A class file can contain inner classes. Inner classes are defined using the class keyword. They are instanced using ttheir  **ClassName.new\(\)** function.
+
 ```python
 # Inside a class file.
 
@@ -687,32 +744,33 @@ func _init():
     c.print_value_of_a()
 ```
 
-Read more [https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget#built-in-types]
-
-
+Read more \[[https://docs.godotengine.org/en/3.1/getting\_started/scripting/gdscript/gdscript\_basics.html?highlight=setget\#built-in-types](https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget#built-in-types)\]
 
 ### Colors
-https://docs.godotengine.org/en/3.1/classes/class_color.html#class-color
 
+[https://docs.godotengine.org/en/3.1/classes/class\_color.html\#class-color](https://docs.godotengine.org/en/3.1/classes/class_color.html#class-color)
 
 ### Update Function
+
 ```python
 func _process(delta):
   if condition:
     do something
   else:
     do something else
-    
 ```
 
 ### Ready
+
 When the node enters the scene tree
+
 ```javascript
 func _ready():
   screensize = get_viewport_rect().size
 ```
----
+
 ### Format Strings
+
 ```python
 # Define a format string with placeholder '%s'
 var format_string = "We're waiting for %s."
@@ -724,7 +782,7 @@ print(actual_string)
 # Output: "We're waiting for Godot."
 ```
 
-There is also another way to format text in GDScript, namely the String.format() method. It replaces all occurrences of a key in the string with the corresponding value. The method can handle arrays or dictionaries for the key/value pairs.
+There is also another way to format text in GDScript, namely the String.format\(\) method. It replaces all occurrences of a key in the string with the corresponding value. The method can handle arrays or dictionaries for the key/value pairs.
 
 ```python
 # Define a format string
@@ -746,17 +804,20 @@ print(actual_string)
 ```
 
 ### Clamp
+
 ```javascript
 clamp() = restrict values in given range
 ```
 
 ### Randomize
+
 ```python
 randomize() //this will turn it on
 randi() % n, random integer between 0 and n-1
 ```
 
 ### Range
+
 ```python
 range(n) # Will go from 0 to n-1
 range(b, n) # Will go from b to n-1
@@ -764,16 +825,19 @@ range(b, n, s) # Will go from b to n-1, in steps of s
 ```
 
 ### Hide
+
 ```javascript
 hide()
 ```
 
 ### Free
+
 ```javascript
 queue_free()
 ```
 
 ### Disable Node
+
 ```javascript
 $CollisionShape2D.disabled = true/false
 ```
@@ -783,14 +847,13 @@ $CollisionShape2D.disabled = true/false
 ### ColorRect for BG Solid Colors
 
 ### Sound Effects
-Use program call *Audacity* to convert to OGG, WAV
-**AudioStreamPlayer (node)**
-Audio files: **OGG** for looping music, **WAV** for Sound Effects
 
-ASP.stream = load("res://Assets/Sounds/BG/loop1.ogg")
-ASP.play()
+Use program call _Audacity_ to convert to OGG, WAV **AudioStreamPlayer \(node\)** Audio files: **OGG** for looping music, **WAV** for Sound Effects
+
+ASP.stream = load\("res://Assets/Sounds/BG/loop1.ogg"\) ASP.play\(\)
 
 #### Creating AudioStreamPlayer Node from code
+
 ```python
 var asp = AudioStreamPlayer.new()
 
@@ -804,6 +867,7 @@ func _ready():
 ### Particles
 
 ### Tween
+
 ```python
 interpolate_property()
 tween.start()
@@ -811,6 +875,7 @@ tween.is_active()
 ```
 
 #### Tweening Back and Forth
+
 ```python
 onready var tween = $Tween
 
@@ -824,7 +889,7 @@ func _start_tween():
     tween.start()
     yield(tween, "tween_completed")
     _on_tween_completed()
-    
+
 
 func _on_tween_completed():
     tween_values.invert()
@@ -832,6 +897,7 @@ func _on_tween_completed():
 ```
 
 ### VisibilityNotifier
+
 ```python
 onready var visibility_notifier = get_node("VisibilityNotifier")
 
@@ -840,27 +906,31 @@ func _ready():
 ```
 
 ### VisibilityEnabler2D
+
 Enable/disable based on screen visibility
 
-
 ### Animation
-**AnimationPlayer (Node)**
 
+**AnimationPlayer \(Node\)**
 
 ## SIGNALS
+
 Signals are a way to send notification messages from an object that other objects can listen to in a generic way. Create custom signals for a class using the signal keyword.
+
 ```javascript
 signal hit
 emit_signal("hit")
 ```
-```pythong
+
+```text
 # Signal with no arguments
 signal your_signal_name
 
 # Signal with two arguments
 signal your_signal_name_with_args(a, b)
 ```
-Here’s an example that creates a custom **signal** in one script and connects the custom **signal** to a method in a separate script, using the *Object.connect()* method:
+
+Here’s an example that creates a custom **signal** in one script and connects the custom **signal** to a method in a separate script, using the _Object.connect\(\)_ method:
 
 ```python
 # your_notifier.gd
@@ -899,7 +969,7 @@ func _ready():
       button.connect("pressed", self, "pressed_handler", [button])
 ```
 
-Signals are generated by the *Object.emit_signal()* method which broadcasts the signal and arguments.
+Signals are generated by the _Object.emit\_signal\(\)_ method which broadcasts the signal and arguments.
 
 ```python
 # your_notifier.gd
@@ -932,10 +1002,12 @@ func _ready():
 ```
 
 ### Custom Signals
+
 ```python
 signal my_signal
 signal my_signal_with_arguments(x, y)
 ```
+
 ```python
 func _ready():
    emit_signal("my_signal")
@@ -949,8 +1021,8 @@ object.connect("my_signal", self, "_on_Timer_my_signal", [], CONNECT_DEFERRED | 
 
 # DISCONNECT
 disconnect("my_signal", self, "_on_my_signal")
-
 ```
+
 ```python
 # In myCustomObject.tscn
 signal my_signal
@@ -958,6 +1030,7 @@ signal my_signal
 func emit():
    emit_signal("my_signal")
 ```
+
 ```python
 # Create an instance of the so-called myCustomObject.tscn scene.
 func _ready():
@@ -965,13 +1038,14 @@ func _ready():
    mco.connect("my_signal", self, "_on_my_signal")
    add_child(mco)   
    get_child(0).emit()
-   
+
 func _on_my_signal():
    print("signal")
 ```
 
 ## YIELD
-GDScript offers support for coroutines via the yield built-in function. Calling yield() will immediately return from the current function, with the current frozen state of the same function as the return value. Calling resume on this resulting object will continue execution and return whatever the function returns. Once resumed, the state object becomes invalid. Here is an example:
+
+GDScript offers support for coroutines via the yield built-in function. Calling yield\(\) will immediately return from the current function, with the current frozen state of the same function as the return value. Calling resume on this resulting object will continue execution and return whatever the function returns. Once resumed, the state object becomes invalid. Here is an example:
 
 ```python
 func my_func():
@@ -992,7 +1066,9 @@ Hello
 my dear
 world
 ```
-It is also possible to pass values between yield() and resume(), for example:
+
+It is also possible to pass values between yield\(\) and resume\(\), for example:
+
 ```python
 func my_func():
    print("Hello")
@@ -1005,7 +1081,9 @@ func _ready():
     print(y.resume("world"))
     # 'y' resumed and is now an invalid state.
 ```
+
 Will print:
+
 ```python
 Hello
 world
@@ -1013,6 +1091,7 @@ cheers!
 ```
 
 ### Yield and Signals
+
 The real strength of using yield is when combined with signals. yield can accept two arguments, an object and a signal. When the signal is received, execution will recommence. Here are some examples:
 
 ```python
@@ -1028,7 +1107,9 @@ yield(get_tree().create_timer(5.0), "timeout")
 # Creating delay
 yield(get_tree().create_timer(2), "timeout")
 ```
+
 Coroutines themselves use the completed signal when they transition into an invalid state, for example:
+
 ```python
 
 ```
@@ -1041,23 +1122,25 @@ func my_func():
 func button_func():
     yield($Button0, "pressed")
     yield($Button1, "pressed")
-    
+
 # my_func will only continue execution once both buttons have been pressed.
 ```
 
-
 ## PHYSICS BODY
+
 ### PhysicsBody2D Mask
+
 If you don't want the enemies to collide with each other then in the MASK property, uncheck the first box. They won't collide with each other
 
 ## Setters/getters
+
 It is often useful to know when a class’ member variable changes for whatever reason. It may also be desired to encapsulate its access in some way.
 
 ```javascript
 var variable = value setget setterfunc, getterfunc
 ```
 
-Whenever the value of variable is modified by an external source (i.e. not from local usage in the class), the setter function (setterfunc above) will be called. This happens before the value is changed. The setter must decide what to do with the new value. Vice versa, when variable is accessed, the getter function (getterfunc above) must return the desired value.
+Whenever the value of variable is modified by an external source \(i.e. not from local usage in the class\), the setter function \(setterfunc above\) will be called. This happens before the value is changed. The setter must decide what to do with the new value. Vice versa, when variable is accessed, the getter function \(getterfunc above\) must return the desired value.
 
 ```javascript
 var myvar setget my_var_set, my_var_get
@@ -1078,37 +1161,40 @@ var my_var = 5 setget myvar_set
 var my_var = 5 setget ,myvar_get
 ```
 
-
-
----
-
 ## INSPECTOR
+
 ### Exports
-This will let the inspector (GUI) to change the values of the variables 
+
+This will let the inspector \(GUI\) to change the values of the variables
+
 ```python
 export (int) var min_speed
 export (Array, String) var strings
 ```
 
 ### Eport Enums as List
+
 ```python
 enum DROPOFF { linear,square,none }
 export(DROPOFF) var dropoff = DROPOFF.linear
 ```
 
 ### PackedScene
+
 Choosing the Class/Scene you want to instance from the GUI. Drag Mob.tscn from the left, file system, and drop it in the right under the Script Variables in the inspector.
+
 ```python
 export (PackedScene) var Mob
 ```
 
-
 ## INSTANCE OF A CLASS/TSCN
+
 ### GUI
+
 Click on the chain link icon on the left panel under the Scene tab.
 
+## CREATING A CLASS INSIDE GDSCRIPT
 
-## CREATING A CLASSS INSIDE GDSCRIPT
 ```python
 extends Node
 class MyObject:
@@ -1122,41 +1208,42 @@ func _ready():
   obj2.dict.greeting = "hello2"
 ```
 
----
-
 ## SINGLETON / AUTOLOAD
+
 Singleton pattern is useful tool for solving the persistent info between scenes.
+
 ### Concept
-- Create objs that are always loaded no matter which snce is running
-- Can store global variables
-- Can handle switching scenes and between scene transitions
-- Act like a singleton
+
+* Create objs that are always loaded no matter which snce is running
+* Can store global variables
+* Can handle switching scenes and between scene transitions
+* Act like a singleton
 
 ### Autoload a script to act like a singleton
-To autoload a script:
-Project > Project Settings > Autoload Tab > Select the tscn/gd script
-- Add the gd script
-- Give it a name
-- Check the enabled
 
-```
+To autoload a script: Project &gt; Project Settings &gt; Autoload Tab &gt; Select the tscn/gd script
+
+* Add the gd script
+* Give it a name
+* Check the enabled
+
+```text
 Assuming you name it PlayerVariables is the name in the AutoLoad slot
 PlayerVariables.health -= 10
 
 Another way if the enabled is not checked
 var player_vars = get_node("/root/PlayerVariables")
 player_vars.health -= 10
-
 ```
 
 ### Creating a custom scene switcher using Autoload
-- Create a Global.gd
-- Add it to Autoload, Project > Project Settings > AutoLoad Tab
-- Autoloaded nodes are always first
-- This means that the last child of root is always the loaded scene.
-- 
 
-```
+* Create a Global.gd
+* Add it to Autoload, Project &gt; Project Settings &gt; AutoLoad Tab
+* Autoloaded nodes are always first
+* This means that the last child of root is always the loaded scene.
+* 
+```text
 extends Node
 
 var current_scene = null
@@ -1194,22 +1281,20 @@ func _deferred_goto_scene(path):
 
     # Optionally, to make it compatible with the SceneTree.change_scene() API.
     get_tree().set_current_scene(current_scene)
-
-
 ```
 
-Using Object.call_deferred(), the second function will only run once all code from the current scene has completed. Thus, the current scene will not be removed while it is still being used (i.e. its code is still running).
+Using Object.call\_deferred\(\), the second function will only run once all code from the current scene has completed. Thus, the current scene will not be removed while it is still being used \(i.e. its code is still running\).
 
 Finally, we need to fill the empty callback functions in the two scenes:
 
-```
+```text
 # Add to 'Scene1.gd'.
 
 func _on_Button_pressed():
     Global.goto_scene("res://Scene2.tscn")
 ```
 
-```
+```text
 # Add to 'Scene2.gd'.
 
 func _on_Button_pressed():
@@ -1217,31 +1302,29 @@ func _on_Button_pressed():
 ```
 
 ## Background loading
+
 ### ResourceInteractiveLoader
 
 The ResourceInteractiveLoader class allows you to load a resource in stages. Every time the method poll is called, a new stage is loaded, and control is returned to the caller. Each stage is generally a sub-resource that is loaded by the main resource. For example, if you’re loading a scene that loads 10 images, each image will be one stage.
 
 ### Usage
-[http://docs.godotengine.org/en/3.1/tutorials/io/background_loading.html#doc-background-loading] (More info)
 
----
+\[[http://docs.godotengine.org/en/3.1/tutorials/io/background\_loading.html\#doc-background-loading](http://docs.godotengine.org/en/3.1/tutorials/io/background_loading.html#doc-background-loading)\] \(More info\)
 
 ## HUD / CanvasLayer/ Sits above the Game / UI
+
 ### Control Nodes for UI
-- Buttons
-- Labels
-- TextureRect
-- TextureProgress
-- TextureButtons
+
+* Buttons
+* Labels
+* TextureRect
+* TextureProgress
+* TextureButtons
 
 ### Properties of Control Nodes
-- Positions
-- Size
-- Anchors
-- Margins
 
-
-
-
-
+* Positions
+* Size
+* Anchors
+* Margins
 
