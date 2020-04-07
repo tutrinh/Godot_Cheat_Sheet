@@ -1140,7 +1140,7 @@ It is often useful to know when a class’ member variable changes for whatever 
 var variable = value setget setterfunc, getterfunc
 ```
 
-Whenever the value of variable is modified by an external source \(i.e. not from local usage in the class\), the setter function \(setterfunc above\) will be called. This happens before the value is changed. The setter must decide what to do with the new value. Vice versa, when variable is accessed, the getter function \(getterfunc above\) must return the desired value.
+Whenever the value of variable is modified by an `external source` \(i.e. not from local usage in the class\), the setter function \(setterfunc above\) will be called. This happens `before the value is changed`. The setter must decide what to do with the new value. Vice versa, when variable is accessed, `the getter function` \(getterfunc above\) `must return the desired value`.
 
 ```javascript
 var myvar setget my_var_set, my_var_get
@@ -1159,6 +1159,10 @@ Either of the setter or getter functions can be omitted:
 var my_var = 5 setget myvar_set
 # Only a getter (note the comma).
 var my_var = 5 setget ,myvar_get
+```
+
+```text
+
 ```
 
 ## INSPECTOR
