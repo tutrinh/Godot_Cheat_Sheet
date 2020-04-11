@@ -10,3 +10,24 @@ signal talk_started(parameter_name)
 signal talk_finished
 ```
 
+### Signal Callbacks
+
+For signal callbacks, we use Godot’s convention, `_on_NodeName_signal_name`:
+
+```text
+func _on_Quest_started(which: Quest) -> void:
+  ...
+  
+```
+
+You should remove `NodeName` if the object connects to itself:
+
+```text
+class_name HitBox
+extends Area2D
+
+
+func _ready() -> void:
+  connect("area_entered", self, "_on_area_entered")
+```
+
