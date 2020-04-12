@@ -51,6 +51,9 @@ func _init():
 ## \_ready
 
 ```text
+export (bool) var active = true
+onready var slide_amount = -10
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -76,8 +79,13 @@ onready var tween = Tween.new()
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	add_child(tween
+	add_child(tween)
+	move_object(offset_y)
 	tween.connect("tween_completed", self, "tween_completed")
+	
+	func move_object(move_y):
+		tween.interpolate_property(self, "rect_position", self.rect_position, Vector2(self.rect_position.x, self.rect_position.y + offset_y), 0.8,Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		tween.start()
 ```
 
 ## Timer
@@ -124,5 +132,11 @@ emit_signal("progress_timer_flash", countdown)
 
 ```text
 enum {ACTIVE, DEACTIVE}
+```
+
+## String interpolation
+
+```text
+print("current time is %s" % countdown)
 ```
 
