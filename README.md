@@ -48,6 +48,12 @@ reload_current_scene ( )
 get_node("NameOfNode") same as $NameOfNode
 ```
 
+### Get Node Path from Export Inspector
+
+```text
+export (NodePath) var targetPath
+```
+
 #### Assigning Node in the Editor using the Export keyword from your script
 
 ```python

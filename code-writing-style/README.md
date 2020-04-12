@@ -1,5 +1,7 @@
 # Code Writing Style
 
+
+
 ```text
 class_name StateMachine
 extends Node
