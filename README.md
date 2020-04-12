@@ -54,7 +54,13 @@ get_node("NameOfNode") same as $NameOfNode
 export (NodePath) var targetPath
 ```
 
-#### Assigning Node in the Editor using the Export keyword from your script
+### Parent Node
+
+```text
+get_node(“/root/parent”)
+```
+
+### Assigning Node in the Editor using the Export keyword from your script
 
 ```python
 var target
