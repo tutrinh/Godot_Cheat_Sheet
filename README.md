@@ -237,6 +237,14 @@ var next_scene = preload("res://levels/level2.tscn")
 get_tree().change_scene_to(next_scene)
 ```
 
+### Current Scene
+
+
+
+```text
+get_tree().reload_current_scene()
+```
+
 ### Saving Game
 
 \[[http://docs.godotengine.org/en/3.1/tutorials/io/saving\_games.html](http://docs.godotengine.org/en/3.1/tutorials/io/saving_games.html)\] \(Saving\)
