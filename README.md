@@ -747,7 +747,7 @@ func some_func(x):
 
 ### Inner Classes
 
-A class file can contain inner classes. Inner classes are defined using the class keyword. They are instanced using ttheir  **ClassName.new\(\)** function.
+A class file can contain inner classes. Inner classes are defined using the class keyword. They are instanced using their  **ClassName.new\(\)** function.
 
 ```python
 # Inside a class file.
