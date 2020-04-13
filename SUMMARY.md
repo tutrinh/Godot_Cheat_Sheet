@@ -11,4 +11,5 @@
   * [Setters / Getters](code-writing-style/setters-getters.md)
   * [Signal](code-writing-style/signal.md)
 * [Process](old-pablo-multiplication-game.md)
+* [Timer and Progress Bar with Additional Time](timer-and-progress-bar-with-additional-time.md)
 

@@ -4,6 +4,22 @@ Godot 3.1 Cheat Sheet
 
 Basic GD scripts [https://docs.godotengine.org/en/3.1/getting\_started/scripting/gdscript/gdscript\_basics.html?highlight=setget](https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html?highlight=setget)
 
+## Settings
+
+Settings
+
+Stretch M 2d Aspect expand Shrink 1
+
+iPhone 8 Iphone x
+
+Size: 1280 x 720 iPhone landscape = 1560 x 720 iPHone x portrait = 720X1560 Stretch Mode: 2d Allo HiDPI: checked Aspect: expand for iPhone X, looks good
+
+## Images
+
+Sketch, export image as @2x png. Mode &gt; Uncompressed in the import tab next to the Scene tab. This works best.
+
+
+
 ### Naming Convention
 
 * Class - PascalCase
@@ -24,7 +40,14 @@ get_tree()
 
 ```python
 # Create timer
+# This creaates a one shot timer
+# Basically creating a delay
 create_timer ( float time_sec, bool pause_mode_process=true )
+
+func _ready():
+    print("start")
+    yield(get_tree().create_timer(10), "timeout")
+    print("10 seconds after")
 
 # Get Current Scene
 current_scene
