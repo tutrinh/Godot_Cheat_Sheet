@@ -590,12 +590,15 @@ Instead, you can give your class a name to register it as a new type in Godot’
 Example of Class File
 
 ```text
+Helper Class
 //SomeClass.gd
 
 func _init():
 	print("Shake class")
-	
-func makeWork():
+
+// This has to be a static function, only member of the class
+// Then the parent is able to call this function 		
+static func makeWork():
 	print("Make work")
 
 // Usage		
