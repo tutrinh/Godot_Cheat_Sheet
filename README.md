@@ -600,6 +600,14 @@ func _init():
 // Then the parent is able to call this function 		
 static func makeWork():
 	print("Make work")
+	
+static func Sum(a, b):
+	return a + b
+	
+func localSum(a, b):
+	return a + b
+	
+
 
 // Usage		
 // Using the Class
@@ -608,9 +616,19 @@ Parent.gd
 extends Node2D
 
 var SomeClass = preload("res://classes/Shake.gd")
+var myClass
 
 func _ready():
-	SomeClass.new()
+	SomeClass.new() // by doing this you can only call the static functions
+	// because you are directly calling the class
+	// Calling static functions only
+	SomeClass.Sum(2,3)
+	// - - - - - - - - - - - - - - - - - 
+	// However by assigning the Class to a variable 
+	myClass = SomeClass.new()
+	// Can access static and non-static functions
+	// Now you can access the func without the static (Class functions only)
+	myClass.localSum(1,2)
 
 ```
 
