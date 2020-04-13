@@ -1203,6 +1203,36 @@ enum DROPOFF { linear,square,none }
 export(DROPOFF) var dropoff = DROPOFF.linear
 ```
 
+## Tool for Seeing Changes in the Editor with Changes from Inspector
+
+**When you add at the top of a script the** _**tool**_ **keyword, it will be executed not only during the game, but also in the editor.** Running a script in the editor can be useful for doing many things, but it’s mostly used in level design to show things that would otherwise be visible only during game play.
+
+```text
+// Skull.gd
+tool
+extends Node2D
+
+enum STATE { disabled,active }
+export(STATE) var state = STATE.active
+
+// preload the textures
+var skull_texture = {'disabled': preload("res://assets/ui/skull-disabled.png"),
+					'active': preload("res://assets/ui/skull-active.png")}
+
+func _ready():
+	match state:
+		1:
+			get_node("skull").texture = skull_texture.active
+			
+// Need the Engine.editor_hint
+func _process(delta):
+	if Engine.editor_hint:
+		if state == STATE.active:
+			get_node("skull").texture = skull_texture.active
+		else:
+			get_node("skull").texture = skull_texture.disabled
+```
+
 ### PackedScene
 
 Choosing the Class/Scene you want to instance from the GUI. Drag Mob.tscn from the left, file system, and drop it in the right under the Script Variables in the inspector.
