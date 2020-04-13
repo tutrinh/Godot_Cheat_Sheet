@@ -587,6 +587,30 @@ var character_node = Character.new()
 
 Instead, you can give your class a name to register it as a new type in Godot’s editor. For that, you use the ‘class\_name’ keyword. You can add an optional comma followed by a path to an image, to use it as an icon. Your class will then appear with its new icon in the editor:
 
+Example of Class File
+
+```text
+//SomeClass.gd
+
+func _init():
+	print("Shake class")
+	
+func makeWork():
+	print("Make work")
+
+// Usage		
+// Using the Class
+Parent.gd
+
+extends Node2D
+
+var SomeClass = preload("res://classes/Shake.gd")
+
+func _ready():
+	SomeClass.new()
+
+```
+
 ```python
 # Item.gd
 
