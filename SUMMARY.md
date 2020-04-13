@@ -10,5 +10,5 @@
   * [Variables](code-writing-style/variables.md)
   * [Setters / Getters](code-writing-style/setters-getters.md)
   * [Signal](code-writing-style/signal.md)
-* [Old Pablo Multiplication Game](old-pablo-multiplication-game.md)
+* [Process](old-pablo-multiplication-game.md)
 

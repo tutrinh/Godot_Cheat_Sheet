@@ -1,4 +1,4 @@
-# Old Pablo Multiplication Game
+# Process
 
 ## Structure
 
@@ -107,6 +107,20 @@ func _ready():
 	func start_game_timer():
 	set_process(true) #Enable Update function
 	timer.start()
+```
+
+## Yield \(\) - Wait then Resume
+
+Is good for waiting for Timer, Tween node to finish. 
+
+```text
+shake_timer.start()
+yield(shake_timer,"timeout")
+
+//Tween
+yield(tween_scorecard,"tween_completed")
+
+
 ```
 
 ## Export for Inspector to change value
