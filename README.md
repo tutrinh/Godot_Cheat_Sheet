@@ -73,13 +73,13 @@ get_node("NameOfNode") same as $NameOfNode
 
 ### Get Node Path from Export Inspector
 
-```text
+```javascript
 export (NodePath) var targetPath
 ```
 
 ### Parent Node
 
-```text
+```javascript
 get_node(“/root/parent”)
 ```
 
@@ -276,7 +276,7 @@ get_tree().change_scene_to(next_scene)
 
 
 
-```text
+```javascript
 get_tree().reload_current_scene()
 ```
 
@@ -308,7 +308,7 @@ Can create new bullet without having to load them again from disk
 
 #### Array
 
-```text
+```javascript
 var arr = []
 PoolIntArray // Array of integers
 PoolStringArray // Array of Strings
@@ -319,7 +319,7 @@ PoolColorArray // Array of Color Objects
 
 Associative container which contains values referenced by unique keys.
 
-```text
+```javascript
 var d = {4: 5, "A key": "A value", 28: [1, 2, 3]}
 d["Hi!"] = 0
 d = {
@@ -332,7 +332,7 @@ d = {
 
 ### Casting
 
-```text
+```javascript
 var my_int: int
 my_int = "123" as int # The string can be converted to int
 my_int = Vector2() as int # A Vector2 can't be converted to int, this will cause an error
@@ -340,7 +340,7 @@ my_int = Vector2() as int # A Vector2 can't be converted to int, this will cause
 
 ### Strong Type
 
-```text
+```javascript
 const A: int = 5
 const B: Vector2 = Vector2()
 ```
@@ -349,7 +349,7 @@ const B: Vector2 = Vector2()
 
 Enums are basically a shorthand for constants, and are pretty useful if you want to assign consecutive integers to some constant.
 
-```text
+```javascript
 enum {TILE_BRICK, TILE_FLOOR, TILE_SPIKE, TILE_TELEPORT}
 # Is the same as:
 const TILE_BRICK = 0
@@ -377,7 +377,7 @@ Useage: Vector2.RIGHT
 
 ### Functions
 
-```text
+```javascript
 func my_function(a: int, b: String):
     pass
 
@@ -387,7 +387,7 @@ func my_function(int_arg := 42, String_arg := "string"):
 
 ### Functions with Return Type
 
-```text
+```javascript
 The return type of the function can be specified after the arguments list using the arrow token (->):
 func my_int_function() -> int:
     return 0
@@ -427,7 +427,7 @@ static func sum2(a, b):
 
 ### if/else/elif
 
-```text
+```python
 if [expression]:
     statement(s)
 elif [expression]:
@@ -438,7 +438,7 @@ else:
 
 #### Shorthand
 
-```text
+```python
 if 1 + 1 == 2: return 2 + 2
 else:
     var x = 3 + 3
@@ -447,14 +447,14 @@ else:
 
 Sometimes you might want to assign a different initial value based on a boolean expression. In this case, ternary-if expressions comes in handy:
 
-```text
+```python
 var x = [value] if [expression] else [value]
 y += 3 if y < 10 else -1
 ```
 
 ### For
 
-```text
+```python
 for x in [5, 7, 11]:
     statement # Loop iterates 3 times with 'x' as 5, then 7 and finally 11.
 
@@ -479,7 +479,7 @@ for c in "Hello":
 
 A match statement is used to branch execution of a program. It’s the equivalent of the switch statement found in many other languages, but offers some additional features.
 
-```text
+```python
 match [expression]:
     [pattern](s):
         [block]
@@ -491,7 +491,7 @@ match [expression]:
 
 Same as switch statements
 
-```text
+```python
 match x:
     1:
         print("We are number one!")
@@ -505,7 +505,7 @@ match x:
 
 It can be used as the equivalent of the default in a switch statement in other languages.
 
-```text
+```python
 match x:
     1:
         print("It's one!")
@@ -589,7 +589,7 @@ Instead, you can give your class a name to register it as a new type in Godot’
 
 Example of Class File
 
-```text
+```python
 Helper Class
 //SomeClass.gd
 
@@ -795,7 +795,7 @@ extends "somefile.gd".SomeInnerClass
 
 To check if a given instance inherits from a given class, the is keyword can be used:
 
-```text
+```python
 # Cache the enemy class.
 const Enemy = preload("enemy.gd")
 
@@ -1010,7 +1010,7 @@ signal hit
 emit_signal("hit")
 ```
 
-```text
+```python
 # Signal with no arguments
 signal your_signal_name
 
@@ -1133,7 +1133,7 @@ func _on_my_signal():
 
 ### Listen for Multiple Buttons
 
-```text
+```javascript
 #Listen for the signal from the buttons
 	for button in $LevelsContainer/GridContainer.get_children():
 		var button_info = singleton.player_dict["players"][singleton.selected_player_index]["levels"][button.get_index()]
@@ -1289,7 +1289,7 @@ export(DROPOFF) var dropoff = DROPOFF.linear
 
 **When you add at the top of a script the** _**tool**_ **keyword, it will be executed not only during the game, but also in the editor.** Running a script in the editor can be useful for doing many things, but it’s mostly used in level design to show things that would otherwise be visible only during game play.
 
-```text
+```javascript
 // Skull.gd
 tool
 extends Node2D
@@ -1363,7 +1363,7 @@ To autoload a script: Project &gt; Project Settings &gt; Autoload Tab &gt; Selec
 * Give it a name
 * Check the enabled
 
-```text
+```python
 Assuming you name it PlayerVariables is the name in the AutoLoad slot
 PlayerVariables.health -= 10
 
@@ -1379,7 +1379,7 @@ player_vars.health -= 10
 * Autoloaded nodes are always first
 * This means that the last child of root is always the loaded scene.
 * 
-```text
+```javascript
 extends Node
 
 var current_scene = null
@@ -1423,14 +1423,14 @@ Using Object.call\_deferred\(\), the second function will only run once all code
 
 Finally, we need to fill the empty callback functions in the two scenes:
 
-```text
+```javascript
 # Add to 'Scene1.gd'.
 
 func _on_Button_pressed():
     Global.goto_scene("res://Scene2.tscn")
 ```
 
-```text
+```javascript
 # Add to 'Scene2.gd'.
 
 func _on_Button_pressed():
