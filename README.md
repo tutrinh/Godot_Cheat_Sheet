@@ -1131,6 +1131,20 @@ func _on_my_signal():
    print("signal")
 ```
 
+### Listen for Multiple Buttons
+
+```text
+#Listen for the signal from the buttons
+	for button in $LevelsContainer/GridContainer.get_children():
+		var button_info = singleton.player_dict["players"][singleton.selected_player_index]["levels"][button.get_index()]
+		#print("button info: ", button_info)
+		if button_info["active"]:
+			button.set_active()
+		#print("button index====",button.get_index())
+		
+		button.connect("level_pressed", self, "_on_level_button_pressed", [button])
+```
+
 ## YIELD
 
 GDScript offers support for coroutines via the yield built-in function. Calling yield\(\) will immediately return from the current function, with the current frozen state of the same function as the return value. Calling resume on this resulting object will continue execution and return whatever the function returns. Once resumed, the state object becomes invalid. Here is an example:
