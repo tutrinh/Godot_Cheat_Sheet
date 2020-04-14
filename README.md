@@ -1139,7 +1139,7 @@ func _on_my_signal():
 ```
 
 ```javascript
-func _on_level_button_pressed(level_num, button):
+func _on_level_button_pressed(level_num, obj):
     pass
 ```
 
