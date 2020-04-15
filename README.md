@@ -30,7 +30,32 @@ Sketch, export image as @2x png. Mode &gt; Uncompressed in the import tab next t
 Object/Class is a .tscsn
 ```
 
-#### Scene Tree
+### Scene Tree
+
+#### Root
+
+```javascript
+
+func _ready():
+var root = get_tree().get_root()
+var root = get_node("/root/")
+
+root.connect("size_changed", self, resize)
+OS.set_window_fullscreen(true)
+set_process_input(true)
+
+
+func resize():
+ var root = get_node("/root/")
+ var reolution = root.get_rect()
+
+ func _input(event):
+  if(event.is_pressed()):
+    if(event.scancode == KEY_ESCAPE):
+     get_tree().quit()
+   
+   
+```
 
 ```python
 get_tree()
