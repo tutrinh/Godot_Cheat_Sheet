@@ -193,7 +193,7 @@ This will store predefined data from the ClassStats with the updated values
 
 ```python
 From another node
-# load the resource that that the data you want to use
+# load the resource that contains the data you want to use
 onready var character_data = load("res://Wizard.tres")
 func _ready():
 
